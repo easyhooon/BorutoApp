@@ -15,7 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetScaffoldState
-import androidx.compose.material.BottomSheetValue
+import androidx.compose.material.BottomSheetValue.Collapsed
+import androidx.compose.material.BottomSheetValue.Expanded
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
@@ -91,7 +92,7 @@ fun DetailsContent(
     }
 
     val scaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Expanded)
+        bottomSheetState = rememberBottomSheetState(initialValue = Expanded)
     )
 
     val currentSheetFraction = scaffoldState.currentSheetFraction
@@ -272,6 +273,7 @@ fun BackgroundContent(
             contentDescription = stringResource(id = R.string.hero_image),
             contentScale = ContentScale.Crop
         )
+
 //        Image(
 //            modifier = Modifier
 //                .fillMaxWidth()
@@ -282,6 +284,7 @@ fun BackgroundContent(
 //            contentDescription = stringResource(id = R.string.hero_image),
 //            contentScale = ContentScale.Crop
 //        )
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
@@ -313,10 +316,10 @@ val BottomSheetScaffoldState.currentSheetFraction: Float
         //Log.d("Fraction Current", currentValue.toString())
 
         return when {
-            currentValue == BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Collapsed -> 1f
-            currentValue == BottomSheetValue.Expanded && targetValue == BottomSheetValue.Expanded -> 0f
-            currentValue == BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Expanded -> 1f - fraction
-            currentValue == BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Collapsed -> 0f + fraction
+            currentValue == Collapsed && targetValue == Collapsed -> 1f
+            currentValue == Expanded && targetValue == Expanded -> 0f
+            currentValue == Collapsed && targetValue == Expanded -> 1f - fraction
+            currentValue == Expanded && targetValue == Collapsed -> 0f + fraction
             else -> fraction
         }
     }
