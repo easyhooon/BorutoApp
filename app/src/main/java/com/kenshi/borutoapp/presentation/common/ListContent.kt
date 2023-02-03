@@ -44,9 +44,9 @@ fun ListContent(
 ) {
     val result = handlePagingResult(heroes = heroes)
 
-    //only result true
+    // only result true
     if (result) {
-        //Log.d("ListContent", heroes.loadState.toString())
+        // Log.d("ListContent", heroes.loadState.toString())
         LazyColumn(
             contentPadding = PaddingValues(all = SMALL_PADDING),
             verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
@@ -57,6 +57,8 @@ fun ListContent(
                     hero.id
                 }
             ) { hero ->
+                // item 에 navController 를 파라미터로 넘겨
+                // item 클릭시 detail screen 으로 넘어갈 수 있도록 함
                 hero?.let {
                     HeroItem(hero = it, navController = navController)
                 }
@@ -93,7 +95,6 @@ fun handlePagingResult(
                 EmptyScreen()
                 false
             }
-
             else -> true
         }
     }
@@ -109,11 +110,11 @@ fun HeroItem(
 //        placeholder(R.drawable.ic_placeholder)
 //        error(R.drawable.ic_placeholder)
 //    }
-
     Box(
         modifier = Modifier
             .height(HERO_ITEM_HEIGHT)
             .clickable {
+                // Detail 화면으로 이동
                 navController.navigate(Screen.Details.passHeroId(heroId = hero.id))
             },
         contentAlignment = Alignment.BottomStart

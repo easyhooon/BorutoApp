@@ -24,10 +24,12 @@ fun SearchScreen(
     val searchQuery by searchViewModel.searchQuery
     val heroes = searchViewModel.searchHeroes.collectAsLazyPagingItems()
 
-    //검색 초기 화면으로 돌아왔을때 변경되었던 statusBar 색상을 제어하기 위함 (원래 색상으로 다시 변경)
+    // 검색 초기 화면으로 돌아왔을때 변경되었던 statusBar 색상을 제어하기 위함 (원래 색상으로 다시 변경)
     val systemUiController = rememberSystemUiController()
     val systemBarColor = MaterialTheme.colors.statusBarColor
 
+    // 해당 함수 호출 의미 학습
+    // -> composable 이 recomposition 이 수행되었을 때 호출
     SideEffect {
         systemUiController.setStatusBarColor(
             color = systemBarColor

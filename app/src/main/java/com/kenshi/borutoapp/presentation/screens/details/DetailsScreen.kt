@@ -17,19 +17,19 @@ import kotlinx.coroutines.flow.collectLatest
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
-//hiltViewModel need initialize
+// hiltViewModel need initialize
 fun DetailsScreen(
     navController: NavHostController,
     detailsViewModel: DetailsViewModel = hiltViewModel()
 ) {
-    //val selectedHero = detailsViewModel.selectedHero
-    //TODO nullable 을 해결할 수 있는 이유
-    //automatically extract that state into a just nuallable hero
-    //type이 state가 아닌 stateFlow라면 뒤에 collectAsState()로 변횐 해줘야함
+    // val selectedHero = detailsViewModel.selectedHero
+    // TODO nullable 을 해결할 수 있는 이유
+    // automatically extract that state into a just nuallable hero
+    // type이 state가 아닌 stateFlow라면 뒤에 collectAsState()로 변횐 해줘야함
     val selectedHero by detailsViewModel.selectedHero.collectAsState()
     val colorPalette by detailsViewModel.colorPalette
 
-    if (colorPalette.isEmpty()) {
+    if (colorPalette.isNotEmpty()) {
         DetailsContent(
             navController = navController,
             selectedHero = selectedHero,
@@ -41,6 +41,8 @@ fun DetailsScreen(
 
     val context = LocalContext.current
 
+    // key 가 true 이면 어떻게 동작하는지 학습
+    // -> composable 이 recomposition 될때마다 호출
     LaunchedEffect(key1 = true) {
         detailsViewModel.uiEvent.collectLatest { event ->
             when (event) {

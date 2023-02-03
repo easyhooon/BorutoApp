@@ -21,23 +21,22 @@ class DetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    //State와 StateFlow 의 차이 -> 해결
-    //private val _selectedHero: MutableState<Hero?> = mutableStateOf(null)
-
-  private val _selectedHero: MutableStateFlow<Hero?> = MutableStateFlow(null)
-    val selectedHero: StateFlow<Hero?> = _selectedHero
+    // State와 StateFlow 의 차이 -> 해결
+    // private val _selectedHero: MutableState<Hero?> = mutableStateOf(null)
+    private val _selectedHero: MutableStateFlow<Hero?> = MutableStateFlow(null)
+    val selectedHero: StateFlow<Hero?> = _selectedHero.asStateFlow()
 
     init {
-        //Dispatchers.IO Do not need? -> need
+        // Dispatchers.IO Do not need? -> need
         viewModelScope.launch(Dispatchers.IO) {
-        //viewModelScope.launch {
+            // viewModelScope.launch {
             val heroId = savedStateHandle.get<Int>(DETAILS_ARGUMENT_KEY)
             _selectedHero.value = heroId?.let { useCases.getSelectedHeroUseCase(heroId = heroId) }
-            //_selectedHero.value?.name?.let { Log.d("Hero", it) }
+            // _selectedHero.value?.name?.let { Log.d("Hero", it) }
         }
     }
 
-    //sharedFlow 를 사용해서 이벤트를 한번만 실행하도록(Configuration change가 일어나도 이벤트가 실행되지 않음)
+    // sharedFlow 를 사용해서 이벤트를 한번만 실행하도록(Configuration change가 일어나도 이벤트가 실행되지 않음)
     private val _uiEvent = MutableSharedFlow<UiEvent>()
     val uiEvent: SharedFlow<UiEvent> = _uiEvent.asSharedFlow()
 
@@ -45,10 +44,8 @@ class DetailsViewModel @Inject constructor(
     val colorPalette: State<Map<String, String>> = _colorPalette
 
     // will emit the new value to our UI event, which is a generate color palette
-    fun generateColorPalette() {
-        viewModelScope.launch {
-            _uiEvent.emit(UiEvent.GenerateColorPalette)
-        }
+    fun generateColorPalette() = viewModelScope.launch {
+        _uiEvent.emit(UiEvent.GenerateColorPalette)
     }
 
     fun setColorPalette(colors: Map<String, String>) {

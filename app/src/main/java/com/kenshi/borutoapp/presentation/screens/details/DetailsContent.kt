@@ -3,37 +3,14 @@ package com.kenshi.borutoapp.presentation.screens.details
 import android.graphics.Color.parseColor
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomSheetScaffold
-import androidx.compose.material.BottomSheetScaffoldState
+import androidx.compose.material.*
 import androidx.compose.material.BottomSheetValue.Collapsed
 import androidx.compose.material.BottomSheetValue.Expanded
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.rememberBottomSheetScaffoldState
-import androidx.compose.material.rememberBottomSheetState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -53,14 +30,7 @@ import com.kenshi.borutoapp.R
 import com.kenshi.borutoapp.domain.model.Hero
 import com.kenshi.borutoapp.presentation.components.InfoBox
 import com.kenshi.borutoapp.presentation.components.OrderedList
-import com.kenshi.borutoapp.ui.theme.EXPANDED_RADIUS_LEVEL
-import com.kenshi.borutoapp.ui.theme.EXTRA_LARGE_PADDING
-import com.kenshi.borutoapp.ui.theme.INFO_ICON_SIZE
-import com.kenshi.borutoapp.ui.theme.LARGE_PADDING
-import com.kenshi.borutoapp.ui.theme.MEDIUM_PADDING
-import com.kenshi.borutoapp.ui.theme.MIN_SHEET_HEIGHT
-import com.kenshi.borutoapp.ui.theme.SMALL_PADDING
-import com.kenshi.borutoapp.ui.theme.titleColor
+import com.kenshi.borutoapp.ui.theme.*
 import com.kenshi.borutoapp.util.Constants.ABOUT_TEXT_MAX_LINES
 import com.kenshi.borutoapp.util.Constants.BASE_URL
 import com.kenshi.borutoapp.util.Constants.MIN_BACKGROUND_IMAGE_HEIGHT
@@ -178,7 +148,6 @@ fun BottomSheetContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = MEDIUM_PADDING),
-            //TODO Arrangement 종류 정리
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             InfoBox(
@@ -212,7 +181,6 @@ fun BottomSheetContent(
         )
         Text(
             modifier = Modifier
-                //.fillMaxWidth()
                 .alpha(ContentAlpha.medium)
                 .padding(bottom = MEDIUM_PADDING),
             text = selectedHero.about,
