@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.kenshi.borutoapp.util.Constants.HERO_REMOTE_KEYS_DATABASE_TABLE
 
 
-//for RemoteMediator
+// for RemoteMediator
 @Entity(tableName = HERO_REMOTE_KEYS_DATABASE_TABLE)
 data class HeroRemoteKeys(
     @PrimaryKey(autoGenerate = false)

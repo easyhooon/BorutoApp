@@ -114,6 +114,9 @@ dependencies {
     // Palette API
     implementation "androidx.palette:palette-ktx:1.0.0"
 
+    // Splash API
+    implementation "androidx.core:core-splashscreen:1.0.0"
+
     // Testing
     androidTestImplementation "androidx.test:runner:1.4.0"
     androidTestImplementation "androidx.test:rules:1.4.0"

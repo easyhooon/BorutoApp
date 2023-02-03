@@ -5,8 +5,7 @@ import androidx.room.PrimaryKey
 import com.kenshi.borutoapp.util.Constants.HERO_DATABASE_TABLE
 import kotlinx.serialization.Serializable
 
-//each every hero and every hero on our server already has a unique ID
-
+// each every hero and every hero on our server already has a unique ID
 @Serializable
 @Entity(tableName = HERO_DATABASE_TABLE)
 data class Hero(

@@ -28,8 +28,8 @@ object RepositoryModule {
     }
 
 
-    //UseCase 도 똑같은 방식으로 repository 를 모듈의 형태로 주입해준다
-    //@Inject constructor 방법이 아니라
+    // UseCase 도 똑같은 방식으로 repository 를 모듈의 형태로 주입해준다
+    // @Inject constructor 방법이 아니라
     @Provides
     @Singleton
     fun provideUserCases(repository: Repository) : UseCases {
