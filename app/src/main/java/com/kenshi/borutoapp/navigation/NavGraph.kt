@@ -25,6 +25,7 @@ fun SetupNavGraph(navController: NavHostController, startDestination: String) {
         navController = navController,
         startDestination = startDestination
     ) {
+        // SplasScreen API 적용으로 해당 스크린을 더이상 사용하지 않음
 //        composable(route = Screen.Splash.route) {
 //            SplashScreen(navController = navController)
 //        }

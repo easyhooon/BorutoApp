@@ -2,6 +2,7 @@ package com.kenshi.borutoapp.di
 
 import androidx.paging.ExperimentalPagingApi
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.kenshi.borutoapp.BuildConfig
 import com.kenshi.borutoapp.data.local.BorutoDatabase
 import com.kenshi.borutoapp.data.remote.BorutoApi
 import com.kenshi.borutoapp.data.repository.RemoteDataSourceImpl
@@ -15,6 +16,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -26,9 +28,24 @@ import javax.inject.Singleton
 object NetworkModule {
 
     @Provides
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
+            .apply {
+                level = if (BuildConfig.DEBUG) {
+                    HttpLoggingInterceptor.Level.BODY
+                } else {
+                    HttpLoggingInterceptor.Level.NONE
+                }
+            }
+    }
+
+    @Provides
     @Singleton
-    fun providerHttpClient(): OkHttpClient {
+    fun providerHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+    ): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(httpLoggingInterceptor)
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15,TimeUnit.SECONDS)
             .build()

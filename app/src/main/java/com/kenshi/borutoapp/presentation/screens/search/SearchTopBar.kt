@@ -67,6 +67,7 @@ fun SearchWidget(
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
+                // for Ui Testing
                 .semantics {
                     contentDescription = "TextField"
                 },
